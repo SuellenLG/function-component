@@ -1,30 +1,25 @@
 import React, { useState } from 'react'
 import { TextField, Button, Switch, FormControlLabel } from '@mui/material'
 
-function FormularioCadastro() {
+function FormularioCadastro({aoEnviar}) {
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
-    const [CPF, setCPF] = useState("");
-
+    const [cpf, setCpf] = useState("");
+    const [promocoes, setPromocoes] = useState(true);
+    const [novidades, setNovidades] = useState(true);
 
     return (
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                console.log(nome, sobrenome);
+                aoEnviar({nome, sobrenome, cpf, novidades, promocoes});
             }}
         >
             <TextField
                 value={nome}
                 onChange={(event) => {
-                    let tmpNome =event.target.value;
-                    if (tmpNome.length >= 3) {
-                        tmpNome = tmpNome.substring(0, 3);
-                    }
-                    setNome(tmpNome);
-                   
+                    setNome(event.target.value);
                 }}
-
 
                 id="nome"
                 label="Nome"
@@ -38,7 +33,6 @@ function FormularioCadastro() {
                     setSobrenome(event.target.value);
                 }}
 
-
                 id="sobrenome"
                 label="Sobrenome"
                 variant="outlined"
@@ -46,14 +40,10 @@ function FormularioCadastro() {
                 fullWidth
             />
             <TextField
-                value={nome}
+                value={cpf}
                 onChange={(event) => {
-                    setNome(event.target.value);
-                    if (nome.length > 3) {
-                        setNome(nome.substring(0, 3));
-                    }
+                    setCpf(event.target.value);
                 }}
-
 
                 id="CPF"
                 label="CPF"
@@ -64,11 +54,25 @@ function FormularioCadastro() {
 
             <FormControlLabel
                 label="Promoções"
-                control={<Switch name="promocoes" defaultChecked />}
+                control={
+                    <Switch
+                        checked={promocoes}
+                        onChange={(event) => {
+                            setPromocoes(event.target.checked)
+                        }}
+                        name="promocoes"
+                        />}
             />
             <FormControlLabel
                 label="Novidades"
-                control={<Switch name="novidades" defaultChecked />}
+                control={
+                    <Switch
+                        checked={novidades}
+                        onChange={(event) => {
+                            setNovidades(event.target.checked)
+                        }}
+                        name="novidades"
+                        />}
             />
 
 
@@ -89,4 +93,12 @@ const [sobrenome,setSobrenome] = useState(""); ==
     const sobrenome = arr[0];
     const setSobrenome = arr[1];
 
+validade nome ==
+value={nome}
+                onChange={(event) => {
+                    let tmpNome =event.target.value;
+                    if (tmpNome.length >= 3) {
+                        tmpNome = tmpNome.substring(0, 3);
+                    }
+                    setNome(tmpNome);
 */
