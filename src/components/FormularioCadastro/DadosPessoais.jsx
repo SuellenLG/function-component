@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { TextField, Button, Switch, FormControlLabel } from '@mui/material'
 
-function FormularioCadastro({ aoEnviar, validarCPF }) {
+function DadosPessoais({ aoEnviar, validarCPF }) {
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
@@ -46,7 +46,7 @@ function FormularioCadastro({ aoEnviar, validarCPF }) {
                     setCpf(event.target.value);
                 }}
                 onBlur={(event) =>{
-                    const ehValido=  validarCPF(cpf);
+                    const ehValido = validarCPF(cpf);
                     setErros({cpf:ehValido})
                 }}
                 
@@ -92,7 +92,7 @@ function FormularioCadastro({ aoEnviar, validarCPF }) {
     );
 }
 
-export default FormularioCadastro;
+export default DadosPessoais;
 
 /*
 const [sobrenome,setSobrenome] = useState(""); ==
