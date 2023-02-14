@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import { TextField, Button, Switch, FormControlLabel } from '@mui/material'
 
-function FormularioCadastro({aoEnviar}) {
+function FormularioCadastro({ aoEnviar, validarCPF }) {
     const [nome, setNome] = useState("");
     const [sobrenome, setSobrenome] = useState("");
     const [cpf, setCpf] = useState("");
     const [promocoes, setPromocoes] = useState(true);
     const [novidades, setNovidades] = useState(true);
+    const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
 
     return (
         <form
             onSubmit={(event) => {
                 event.preventDefault();
-                aoEnviar({nome, sobrenome, cpf, novidades, promocoes});
+                aoEnviar({ nome, sobrenome, cpf, novidades, promocoes });
             }}
         >
             <TextField
@@ -44,7 +45,13 @@ function FormularioCadastro({aoEnviar}) {
                 onChange={(event) => {
                     setCpf(event.target.value);
                 }}
-
+                onBlur={(event) =>{
+                    const ehValido=  validarCPF(cpf);
+                    setErros({cpf:ehValido})
+                }}
+                
+                error={!erros.cpf.valido}
+                helperText={erros.cpf.texto}
                 id="CPF"
                 label="CPF"
                 variant="outlined"
@@ -61,7 +68,7 @@ function FormularioCadastro({aoEnviar}) {
                             setPromocoes(event.target.checked)
                         }}
                         name="promocoes"
-                        />}
+                    />}
             />
             <FormControlLabel
                 label="Novidades"
@@ -72,7 +79,7 @@ function FormularioCadastro({aoEnviar}) {
                             setNovidades(event.target.checked)
                         }}
                         name="novidades"
-                        />}
+                    />}
             />
 
 
