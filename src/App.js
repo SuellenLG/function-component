@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import FormularioCadastro from './components/FormularioCadastro/FormularioCadastro';
-
 import '@fontsource/roboto';
 
 import { Container, Typography } from "@mui/material"
@@ -20,6 +19,7 @@ class App extends Component {
 
 function aoEnviarForm(dados) {
   console.log(dados);
+  console.log("oi");
 }
 
 function validarCPF(cpf){

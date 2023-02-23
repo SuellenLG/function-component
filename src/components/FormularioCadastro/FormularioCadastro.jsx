@@ -1,46 +1,50 @@
 import React, { useState } from 'react'
-import DadosEntrega from './DadosEntrega';
+import { Step, StepLabel, Stepper, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import DadosPessoais from './DadosPessoais';
-import Dadosusuario from './Dadosusuario';
-import { Typography } from '@mui/material';
+import DadosEntrega from './DadosEntrega';
+import DadosUsuario from './DadosUsuario';
+
 
 function FormularioCadastro({ aoEnviar, validarCPF }) {
   const [etapaAtual, setEtapaAtual] = useState(0);
+  const [dadosColetados, setDados] = useState();
 
-  function proximo(){
-    setEtapaAtual(etapaAtual+1);
-  }
-
-  function formularioAtual(etapa) {
-    switch (etapa) {
-      case 0:
-        return <Dadosusuario aoEnviar={proximo}/>
-      case 1:
-        return < DadosPessoais aoEnviar={proximo} validarCPF={validarCPF} />
-      case 2:
-        return <DadosEntrega aoEnviar={aoEnviar}/>
-      default:
-        return <Typography>Erro</Typography>
+  useEffect(() => {
+    if(etapaAtual === formulario.length-1){
+      aoEnviar(dadosColetados);
     }
+  })
+
+  const formulario = [
+    <DadosUsuario aoEnviar={coletarDados} />,
+    <DadosPessoais aoEnviar={coletarDados} validarCPF={validarCPF} />,
+    <DadosEntrega aoEnviar={coletarDados} />,
+    <Typography variant="h5">Obrigada pelo cadastro!</Typography>,
+  ];
+
+  function coletarDados(dados) {
+    setDados({ ...dadosColetados, ...dados });
+    proximo();
   }
 
-  return (
-    <>
-      {formularioAtual(etapaAtual)}
+  function proximo() {
+    setEtapaAtual(etapaAtual + 1);
 
+  }
 
-    </>
+  return <> 
+  <Stepper activeStep={etapaAtual}>
+    <Step><StepLabel>Loggin</StepLabel></Step>
+    <Step><StepLabel>Pessoal</StepLabel></Step>
+    <Step><StepLabel>Entrega</StepLabel></Step>
+    <Step><StepLabel>Finalização</StepLabel></Step>
+  </Stepper>
+  {formulario[etapaAtual]} 
+  </>;
 
-
-  );
 }
 
 
 export default FormularioCadastro;
 
-/*
-<DadosPessoais aoEnviar={aoEnviar} validarCPF={validarCPF} />
-<Dadosusuario />
-<DadosEntrega />
-
-*/
