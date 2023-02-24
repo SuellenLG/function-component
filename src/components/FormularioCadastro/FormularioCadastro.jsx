@@ -6,7 +6,7 @@ import DadosEntrega from './DadosEntrega';
 import DadosUsuario from './DadosUsuario';
 
 
-function FormularioCadastro({ aoEnviar, validarCPF }) {
+function FormularioCadastro({ aoEnviar }) {
   const [etapaAtual, setEtapaAtual] = useState(0);
   const [dadosColetados, setDados] = useState();
 
@@ -18,7 +18,7 @@ function FormularioCadastro({ aoEnviar, validarCPF }) {
 
   const formulario = [
     <DadosUsuario aoEnviar={coletarDados} />,
-    <DadosPessoais aoEnviar={coletarDados} validarCPF={validarCPF} />,
+    <DadosPessoais aoEnviar={coletarDados}/>,
     <DadosEntrega aoEnviar={coletarDados} />,
     <Typography variant="h5">Obrigada pelo cadastro!</Typography>,
   ];
