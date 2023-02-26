@@ -4,7 +4,7 @@ import FormularioCadastro from './components/FormularioCadastro/FormularioCadast
 import '@fontsource/roboto';
 import { Container, Typography } from "@mui/material";
 import { validarCPF, validarSenha } from "./models/Cadastro"
-import ValidacoesCadastro  from "../src/context/ValidacoesCadastro";
+import ValidacoesCadastro from "../src/context/ValidacoesCadastro";
 
 
 
@@ -17,7 +17,7 @@ class App extends Component {
         <ValidacoesCadastro.Provider value={{ cpf: validarCPF, senha: validarSenha, nome: validarSenha }}>
           <FormularioCadastro aoEnviar={aoEnviarForm} />
         </ValidacoesCadastro.Provider>
-        
+       
       </Container>
     );
   }
